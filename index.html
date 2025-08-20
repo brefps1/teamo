@@ -32,14 +32,55 @@
     h1 {
       font-size: 22px;
       margin-bottom: 10px;
+      background: linear-gradient(90deg, #9b59b6, #ffffff, #9b59b6);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientTitle 5s ease-in-out infinite;
+      font-weight: bold;
     }
     h2 {
       font-size: 18px;
       margin: 0 0 20px;
     }
-    .brenno { color: #3498db; }
-    .sther { color: #e91e63; }
-    .cora { color: #ff0000; }
+
+    /* Gradientes animados nomes */
+    .brenno {
+      background: linear-gradient(90deg, #3498db, #ffffff, #3498db);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientB 4s ease-in-out infinite;
+      font-weight: bold;
+    }
+    .sther {
+      background: linear-gradient(90deg, #e91e63, #ffffff, #e91e63);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientS 4s ease-in-out infinite;
+      font-weight: bold;
+    }
+    .cora {
+      color: #ff0000;
+    }
+
+    @keyframes gradientTitle {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+    @keyframes gradientB {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+    @keyframes gradientS {
+      0% { background-position: 100% center; }
+      50% { background-position: 0% center; }
+      100% { background-position: 100% center; }
+    }
+
     .big {
       display: flex;
       flex-wrap: wrap;
