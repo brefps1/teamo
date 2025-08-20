@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brenno ❤ Sther - Contagem Regressiva</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: linear-gradient(180deg,#071025 0%, #041022 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 420px;
+      z-index: 2;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 0 0 20px;
+      color: #ff6b6b;
+    }
+    .big {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .timebox {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 12px;
+      min-width: 80px;
+    }
+    .num {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .lbl {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 4px;
+    }
+    .muted {
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    /* Corações animados */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      color: #ff6b6b;
+      font-size: 20px;
+      animation: rise 8s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50% { transform: translateY(-50vh) scale(1.2); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(0.8); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Contagem Regressiva</h1>
+    <h2>Brenno ❤ Sther</h2>
+    <p>Aniversário de 1 ano: <strong>22/10/2025</strong></p>
+
+    <div class="big">
+      <div class="timebox">
+        <div class="num" id="monthsLeft">0</div>
+        <div class="lbl">meses</div>
+      </div>
+      <div class="timebox">
+        <div class="num" id="daysLeft">0</div>
+        <div class="lbl">dias</div>
+      </div>
+      <div class="timebox">
+        <div class="num" id="hoursLeft">0</div>
+        <div class="lbl">horas</div>
+      </div>
+    </div>
+
+    <p class="muted">Faltam <span id="daysRemaining">0 dias</span> para completarmos 1 ano juntos! ❤</p>
+  </div>
+
+  <script>
+    function updateCountdown(){
+      const target = new Date('2025-10-22T00:00:00');
+      const now = new Date();
+
+      const diff = target - now;
+      if(diff <= 0){
+        document.getElementById('daysRemaining').textContent = '0 dias';
+        document.getElementById('monthsLeft').textContent = '0';
+        document.getElementById('daysLeft').textContent = '0';
+        document.getElementById('hoursLeft').textContent = '0';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff / (1000*60*60)) % 24);
+      const months = Math.floor(days/30);
+      const restDays = days % 30;
+
+      document.getElementById('daysRemaining').textContent = days + ' dias';
+      document.getElementById('monthsLeft').textContent = months;
+      document.getElementById('daysLeft').textContent = restDays;
+      document.getElementById('hoursLeft').textContent = hours;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000*60*60);
+
+    // corações animados
+    function createHeart(){
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (16 + Math.random()*24) + 'px';
+      heart.style.animationDuration = (5 + Math.random()*5) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(()=>{ heart.remove(); }, 10000);
+    }
+
+    setInterval(createHeart, 800);
+  </script>
+</body>
+</html>
