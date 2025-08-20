@@ -21,7 +21,7 @@
       padding: 30px;
       border-radius: 20px;
       text-align: center;
-      max-width: 420px;
+      max-width: 460px;
       z-index: 2;
       position: relative;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -34,18 +34,12 @@
       font-size: 18px;
       margin: 0 0 20px;
     }
-    /* cores personalizadas */
-    .brenno {
-      color: #3498db; /* azul */
-    }
-    .sther {
-      color: #e91e63; /* rosa */
-    }
-    .cora {
-      color: #ff0000; /* vermelho */
-    }
+    .brenno { color: #3498db; }
+    .sther { color: #e91e63; }
+    .cora { color: #ff0000; }
     .big {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
       margin: 20px 0;
@@ -70,8 +64,6 @@
       font-size: 14px;
       margin-top: 10px;
     }
-
-    /* Corações animados */
     .heart {
       position: absolute;
       bottom: -20px;
@@ -80,7 +72,6 @@
       animation: rise 8s linear infinite;
       opacity: 0.8;
     }
-
     @keyframes rise {
       0% { transform: translateY(0) scale(1); opacity: 0.8; }
       50% { transform: translateY(-50vh) scale(1.2); opacity: 1; }
@@ -111,6 +102,14 @@
         <div class="num" id="hoursLeft">0</div>
         <div class="lbl">horas</div>
       </div>
+      <div class="timebox">
+        <div class="num" id="minutesLeft">0</div>
+        <div class="lbl">minutos</div>
+      </div>
+      <div class="timebox">
+        <div class="num" id="secondsLeft">0</div>
+        <div class="lbl">segundos</div>
+      </div>
     </div>
 
     <p class="muted">Faltam <span id="daysRemaining">0 dias ⏳</span> para completarmos 1 ano juntos! ❤</p>
@@ -127,24 +126,30 @@
         document.getElementById('monthsLeft').textContent = '0';
         document.getElementById('daysLeft').textContent = '0';
         document.getElementById('hoursLeft').textContent = '0';
+        document.getElementById('minutesLeft').textContent = '0';
+        document.getElementById('secondsLeft').textContent = '0';
         return;
       }
 
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff / (1000*60*60)) % 24);
-      const months = Math.floor(days/30);
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const months = Math.floor(days / 30);
       const restDays = days % 30;
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
 
       document.getElementById('daysRemaining').textContent = days + ' dias';
       document.getElementById('monthsLeft').textContent = months;
       document.getElementById('daysLeft').textContent = restDays;
       document.getElementById('hoursLeft').textContent = hours;
+      document.getElementById('minutesLeft').textContent = minutes;
+      document.getElementById('secondsLeft').textContent = seconds;
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000*60*60);
+    setInterval(updateCountdown, 1000);
 
-    // corações animados
     function createHeart(){
       const heart = document.createElement('div');
       heart.classList.add('heart');
